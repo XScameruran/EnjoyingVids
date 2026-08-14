@@ -7,9 +7,7 @@ import (
 	"enjoy/services/repos/subsrepo"
 	"enjoy/services/repos/likedvideosrepo"
 	"enjoy/services/repos/registerrepo"
-	// "enjoy/services/repos/"
-	// "enjoy/services/repos/"
-	// "enjoy/services/repos/"
+	"enjoy/api/ai"
 	"net/http"
 	"fmt"
 )
@@ -21,10 +19,19 @@ type Handler struct {
 	SubsRepo *subsrepo.SubsRepository
 	LikedVideosRepo *likedvideosrepo.LikedVideosRepository
 	RegisterRepo *registerrepo.RegisterRepository
+	AI *ai.AI
 }
 
 // vidrepo *videorepo.VideoRepository, comrepo *commentrepo.CommentRepository, usrrepo *userrepo.UserRepository
-func New(vidrepo *videorepo.VideoRepository, comrepo *commentrepo.CommentRepository, usrrepo *userrepo.UserRepository, subrepo *subsrepo.SubsRepository, likedv *likedvideosrepo.LikedVideosRepository, regrepo *registerrepo.RegisterRepository) *Handler {
+func New(
+		vidrepo *videorepo.VideoRepository, 
+		comrepo *commentrepo.CommentRepository, 
+		usrrepo *userrepo.UserRepository, 
+		subrepo *subsrepo.SubsRepository, 
+		likedv *likedvideosrepo.LikedVideosRepository, 
+		regrepo *registerrepo.RegisterRepository,
+		AI *ai.AI,
+	) *Handler {
 	return &Handler{
 		VideoRepo: vidrepo,
 		CommentRepo: comrepo,
@@ -32,6 +39,7 @@ func New(vidrepo *videorepo.VideoRepository, comrepo *commentrepo.CommentReposit
 		SubsRepo: subrepo,
 		LikedVideosRepo: likedv,
 		RegisterRepo: regrepo,
+		AI: AI,
 	}
 } 
 

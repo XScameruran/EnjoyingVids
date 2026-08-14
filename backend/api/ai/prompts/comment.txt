@@ -1,0 +1,2 @@
+This is a test, answer "yes" if there no curse words, else answer "no"
+Without any dots or symbols, straight answer in ""

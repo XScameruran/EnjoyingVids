@@ -24,6 +24,7 @@ func (h *Handler) HandleVideo(w http.ResponseWriter, r *http.Request, id string)
 				http.Error(w, "Not found", http.StatusNotFound)
 				return
 			}
+			h.AI.ModerateComments("fuck off")
 			huh := json.NewEncoder(w)
 			huh.Encode(video)
 		case http.MethodPost, http.MethodPut:
