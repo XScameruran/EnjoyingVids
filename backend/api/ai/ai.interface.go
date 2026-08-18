@@ -5,7 +5,7 @@ import (
 )
 
 type AI struct {
-	OpenAI *models.OpenAI
+	OpenAI *models.OpenAI;
 }
 
 func New(openAI *models.OpenAI) *AI {

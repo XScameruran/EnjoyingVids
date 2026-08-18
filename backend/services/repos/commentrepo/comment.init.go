@@ -5,7 +5,7 @@ func (c *CommentRepository) InitializeComments() (bool, error) {
      	ID BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
      	AuthorID TEXT NOT NULL,
      	VideoID TEXT NOT NULL,
-     	Text VARCHAR(256) NOT NULL,
+     	CommentText VARCHAR(256) NOT NULL,
      	Date DATE DEFAULT CURRENT_DATE,
      	ParentID BIGINT,
      	Likes INT DEFAULT 0,

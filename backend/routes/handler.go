@@ -57,6 +57,10 @@ func (h *Handler) RegisterRoutes(mux *http.ServeMux) {
 		id := r.PathValue("id")
 		h.HandleVideo(w, r, id)
 	})
+	mux.HandleFunc("/Videos/{id}/Comments/", func(w http.ResponseWriter, r *http.Request) {
+		id := r.PathValue("id")
+		h.HandleComments(w, r, id)
+	})
 	mux.HandleFunc("/Profile/", h.HandleProfile)
 	mux.HandleFunc("/Register/", h.HandleRegister)
 	mux.HandleFunc("/LogIn/", h.HandleLogIn)

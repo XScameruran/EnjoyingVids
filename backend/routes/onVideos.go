@@ -10,6 +10,9 @@ import (
 func (h *Handler) HandleVideos(w http.ResponseWriter, r *http.Request) {
 	method := r.Method
 	switch method {
+		case http.MethodDelete: 
+			w.WriteHeader(http.StatusNotImplemented)
+			w.Write([]byte("Not implemented"))
 		case http.MethodGet:
 			videos, err := h.VideoRepo.GetVideos()
 			if err != nil {

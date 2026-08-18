@@ -4,7 +4,6 @@ import (
 	// "database/sql"
 	// "encoding/json"
 	"fmt"
-	"log"
 	"time"
 )
 
@@ -33,8 +32,7 @@ func (v *VideoRepository) GetVideos() ([]Videos, error) {
 		FROM Videos
 	`)
 	if err != nil {
-		videos.Err()
-		log.Fatal(err)
+		return nil, err
 	}
 	defer videos.Close()
 	for videos.Next() {
@@ -44,12 +42,15 @@ func (v *VideoRepository) GetVideos() ([]Videos, error) {
 
 		if err != nil {
 			fmt.Println("err:", err)
-			return nil, err
 		}
 
 		videosList = append(videosList, video)
 	}
-	fmt.Println(videosList)
+
+	if err := videos.Err(); err != nil {
+		return nil, err
+	}
+
 	return videosList, nil
 }
 

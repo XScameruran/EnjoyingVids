@@ -11,10 +11,9 @@ func (ai *AI) ModerateComments(message string) {
 		log.Fatal(err)
 	}
 	fmt.Println("response:", res)
+	if res.Allow {
 
-	if res == "yes" {
-		fmt.Println("LETS GO")
 	} else {
-		fmt.Println("BRUH")
+
 	}
 }

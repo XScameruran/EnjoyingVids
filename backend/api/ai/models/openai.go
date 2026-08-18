@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"encoding/json"
 
 	"github.com/openai/openai-go/v3"
 	"github.com/openai/openai-go/v3/option"
@@ -24,6 +25,11 @@ type Config struct {
 	Model string
 }
 
+type CommentModResponse struct {
+	Allow bool `json:"Allow"`
+	Reason string `json:"Reason"`
+}
+
 func New(config *config.Config) *OpenAI {
 	return &OpenAI{
 		Client: openai.NewClient(
@@ -33,7 +39,7 @@ func New(config *config.Config) *OpenAI {
 	}
 }
 
-func (ai *OpenAI) ModerateMessages(message string) (string, error) {
+func (ai *OpenAI) ModerateMessages(message string) (CommentModResponse, error) {
 	ctx := context.Background()
 	messageprompt := prompts.GetComPrompt(message)
 
@@ -48,6 +54,11 @@ func (ai *OpenAI) ModerateMessages(message string) (string, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(res)
+	fmt.Println(res.OutputText())
 
-	return res.OutputText(), nil
+	var stRes CommentModResponse
+	json.Unmarshal([]byte(res.OutputText()), &stRes)
+
+	return stRes, nil
 }
